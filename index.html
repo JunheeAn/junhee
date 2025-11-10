@@ -90,20 +90,20 @@ body.dark .custom-text-container{color:#fff}
 }
 body.dark .back-to-start{color:#fff}
 
-/* Quick intro card — fixed at top-right from #0~#22 */
+/* Quick intro (more transparent) — fixed top-right from #0~#22 */
 details.quick-intro{
   position:fixed;top:10px;right:var(--pad);z-index:30;display:none;
   width:min(40ch,44vw);
-  background:rgba(255,255,255,.94);
-  backdrop-filter:saturate(1.1) blur(3px);
+  background:rgba(255,255,255,.55);           /* 더 투명 */
+  backdrop-filter:saturate(1.05) blur(2px);
   border:1px solid #e5e7eb;border-radius:10px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
+  box-shadow:0 6px 20px rgba(0,0,0,.05);
   color:#111;padding:8px 12px;
 }
-details.quick-intro[open]{background:rgba(255,255,255,.98)}
+details.quick-intro[open]{background:rgba(255,255,255,.72)} /* 펼침 시도 살짝 진하게 */
 details.quick-intro summary{
   cursor:pointer;list-style:none;font-size:1rem;line-height:1.35;font-weight:700;outline:none;
-  text-align:right; /* 요약 텍스트 우측 정렬 */
+  text-align:right;
 }
 details.quick-intro summary::-webkit-details-marker{display:none}
 details.quick-intro summary .sub{font-weight:400;font-size:.92rem;color:#374151}
@@ -357,7 +357,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈</div>
   <figure>
     <figure><img src="assets/img/9.png" alt="사군자, 2003" loading="lazy"><figcaption>2003.</figcaption></figure>
-    <figure><img src="assets/img/10.png" alt="MJ Demarco" loading="lazy"><figcaption>엠제이 드마코(MJ DeMarco). 성공의 3F...</figcaption></figure>
+    <figure><img src="assets/img/10.png" alt="MJ Demarco" loading="lazy"><figcaption>엠제이 드마코(MJ DeMarco). 성공의 3F. '가족(Family), 건강(Fitness), 경제적자유(Freedom). 마지막 요소 경제적 자유는 사랑하는 일을, 원하는 시간에 할 수 있는 상태를 말한다.'</figcaption></figure>
   </figure>
   <p>
     ●<br><br>
@@ -370,19 +370,21 @@ details.quick-intro a:hover{border-bottom-color:#111}
   </p>
 </section>
 
+<!-- ====== 여기서부터 #13~#21: 원문 완전 복구 ====== -->
+
 <!-- 13 -->
 <section id="13">
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/11.png" alt="소비시선. 2021" loading="lazy"><figcaption>소비시선. 2021.</figcaption></figure>
+      <figure>
+        <img src="assets/img/11.png" alt="소비시선. 2021" loading="lazy">
+        <figcaption>소비시선. 2021.</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다.
     <mark>인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.</mark>
     <a href="#14">졸업전시</a>
   </p>
@@ -393,17 +395,22 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/13.png" alt="" loading="lazy"><figcaption></figcaption></figure>
-      <figure><img src="assets/img/30.png" alt="" loading="lazy"><figcaption>『숭배하는자 경멸하는자』. 2022. ...</figcaption></figure>
-      <figure><img src="assets/img/14.png" alt="파스칼 브뤼크네르 돈의 철학" loading="lazy"><figcaption>파스칼 브뤼크네르, 《돈의 철학》 ...</figcaption></figure>
+      <figure>
+        <img src="assets/img/13.png" alt="숭배하는자 경멸하는자" loading="lazy">
+        <figcaption></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/30.png" alt="숭배하는자 경멸하는자2" loading="lazy">
+        <figcaption>『숭배하는자 경멸하는자』. 2022. '돈은 물과 같아서 여러 형태로 '변화'한다. 죽음 앞에서는 조의금으로, 결혼 앞에서는 축의금으로. 사람을 노예로 만들기도, 노예를 해방시키기도 한다.'</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/14.png" alt="파스칼브뤼크네르" loading="lazy">
+        <figcaption>파스칼 브뤼크네르, 《돈의 철학》. '돈은 죽음공포와 연결되어있기에 생의 모든 문제를 상상적으로 보상해준다.'</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. <mark style="color:#fff">2024년 2월 졸업을 한다.</mark></span>
-    나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. ...
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. <mark>(서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.)</mark> 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
     <mark>돈을 주제로 졸업전시를 한다.</mark>
     <a href="#15">epoché<br><br><br><br></a>
   </p>
@@ -413,15 +420,21 @@ details.quick-intro a:hover{border-bottom-color:#111}
 <section id="15">
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave</div>
   <figure>
-    <figure><img src="assets/img/16.png" alt="MONEYNOW. 2021" loading="lazy"><figcaption>MONEYNOW. 2021. 아이들을 위한 자산관리앱.</figcaption></figure>
-    <figure><div class="video-fallback" role="img" aria-label="carpo 영상 준비 중">carpo — 영상 준비 중</div><figcaption>carpo. 2022.</figcaption></figure>
+    <figure>
+      <figure>
+        <img src="assets/img/16.png" alt="머니나우" loading="lazy">
+        <figcaption>MONEYNOW. 2021. 아이들을 위한 자산관리앱.</figcaption>
+      </figure>
+      <figure>
+        <div class="video-fallback" role="img" aria-label="carpo 영상 준비 중">carpo — 영상 준비 중</div>
+        <figcaption>carpo. 2022.</figcaption>
+      </figure>
+    </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다.
     <mark>모든 이분법적 사고를 깨버린다.</mark>
+    성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
     <a href="#16">Elliott Wave<br><br><br><br></a>
   </p>
 </section>
@@ -430,13 +443,13 @@ details.quick-intro a:hover{border-bottom-color:#111}
 <section id="16">
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG</div>
   <figure>
-    <figure><img src="assets/img/25.png" alt="양생음사/음생양사. 2022" loading="lazy"><figcaption>투자 중독 치유 캠페인, '양생음사/음생양사'. 2022.</figcaption></figure>
+    <figure>
+      <img src="assets/img/25.png" alt="양생음사 음생양사" loading="lazy">
+      <figcaption>투자 중독 치유 캠페인, '양생음사/음생양사'. 2022.</figcaption>
+    </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
     <mark>코끼리 파동이론을 공부하고 실전투자대회에 여러번 참가한다.</mark>
     <a href="#17">#1 LONG<br><br><br><br></a>
   </p>
@@ -447,16 +460,20 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/21.png" alt="Brahman Long" loading="lazy"><figcaption>Brahman Long. 2022. ...</figcaption></figure>
-      <figure><img src="assets/img/22.png" alt="Brahman Long Story" loading="lazy"><figcaption>Brahman Long Story1. 2022. ...</figcaption></figure>
+      <figure>
+        <img src="assets/img/21.png" alt="Brahman Long" loading="lazy">
+        <figcaption>Brahman Long. 2022. "내가 곧 길이요 진리요 생명이니 호재를 재료로하여 해와 같이 빛나리라"</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/22.png" alt="Brahman Long Story" loading="lazy">
+        <figcaption>Brahman Long Story1. 2022. "메로나의 영광이 있으매 그 메로나빔이 지극히 귀한 보석 같고 찬란한 보화와도 같으니"</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
-    <mark>숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다...</mark>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다.
+    <mark>숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. </mark>
+    성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. <mark>'<a href="https://en.wikipedia.org/wiki/Elliott_wave_principle" target="_blank">Elliott Wave Theory</a>'</mark>을 공부하고 실전투자대회에 여러번 참가한다.
     <a href="#18">#2 SHORT<br><br><br><br></a>
   </p>
 </section>
@@ -466,15 +483,20 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/23.png" alt="Shiva Short" loading="lazy"><figcaption>Shiva Short. 2022. ...</figcaption></figure>
-      <figure><img src="assets/img/24.png" alt="Shiva Short Story" loading="lazy"><figcaption>Shiva Short Story1. 2022. ...</figcaption></figure>
+      <figure>
+        <img src="assets/img/23.png" alt="Shiva Short" loading="lazy">
+        <figcaption>Shiva Short. 2022. "2021년 5월 8일, 파괴의 신 'Shiva Short'은 드디어 결단을 내렸다. 탐욕과 과신으로 가득찬 저 오만한 양봉들을 심판하기로 한 것이다."</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/24.png" alt="Shiva Short Story" loading="lazy">
+        <figcaption>Shiva Short Story1. 2022. "핏빛 음봉으로 가득한 이곳. 전혀 구제 받을 수 없다는 의미로 아비지옥으로 불리운다. 일부 신봉자들은 '태초마을'이라 칭하기도 한다."</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다.
+    <mark>Long과 Short 역시 사실 차이가 없다. </mark>
+    성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
     <a href="#19">확실해?</a>
   </p>
 </section>
@@ -484,15 +506,19 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/26.png" alt="숭배하는자 Poster. 2022" loading="lazy"><figcaption>숭배하는자 Poster. 2022.</figcaption></figure>
-      <figure><img src="assets/img/27.png" alt="경멸하는자 Poster. 2022" loading="lazy"><figcaption>경멸하는자 Poster. 2022.</figcaption></figure>
+      <figure>
+        <img src="assets/img/26.png" alt="숭배하는자 Poster. 2022" loading="lazy">
+        <figcaption>숭배하는자 Poster. 2022.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/27.png" alt="경멸하는자 Poster. 2022" loading="lazy">
+        <figcaption>경멸하는자 Poster. 2022.</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
+    <mark>(정말로 그럴까?)</mark> 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
     <a href="#20">요즘엔<br><br><br><br></a>
   </p>
 </section>
@@ -502,14 +528,15 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔<br>Non-player</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/32.png" alt="DreamCanvas 창업계획서. 2023" loading="lazy"><figcaption>DreamCanvas 창업계획서. 2023</figcaption></figure>
+      <figure>
+        <img src="assets/img/32.png" alt="DreamCanvas 창업계획서. 2023" loading="lazy">
+        <figcaption>DreamCanvas 창업계획서. 2023</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다.
+    <mark><a href="https://en.wikipedia.org/wiki/Alien" target="_blank">외계인</a>과 UFO는 실존한다!</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
     <mark>'DreamCanvas' 창업을 준비하고 있다.</mark>
     <a href="#21">Non-player<br><br><br><br></a>
   </p>
@@ -520,14 +547,15 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔<br>Non-player<br>●</div>
   <figure>
     <figure>
-      <figure><img src="assets/img/31.png" alt="UE5 자연어처리 NPC. 2023" loading="lazy"><figcaption>Unreal Engine5에서 구현한 자연어처리 NPC. 2023. '식물학을 전공하는 21살 대학생 Dorothy님'</figcaption></figure>
+      <figure>
+        <img src="assets/img/31.png" alt="UE5 자연어처리 NPC. 2023" loading="lazy">
+        <figcaption>Unreal Engine5에서 구현한 자연어처리 NPC. 2023. '식물학을 전공하는 21살 대학생 Dorothy님'</figcaption>
+      </figure>
     </figure>
   </figure>
   <p>
-    ●<br><br>
-    <span class="dim">1995년 4월 22일 대전 출생. 이름은 안준희이다.</span>
-    <span class="dim">키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.</span>
-    <span class="dim">2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</span>
+    ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 외계인과 UFO는 실존한다! <mark>(외계인에게 주민등록증을 발급한다면...)</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다. 'DreamCanvas' 창업을 준비하고 있다.
+    <mark>AI NPC에게 주민등록증을 발급한다면 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) 문제를 단숨에 해결할 수 있을 것이다.</mark>
     <a href="#22">●<br><br><br><br></a>
   </p>
 </section>
@@ -540,7 +568,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
   </p>
 </section>
 
-<!-- (opt) audio -->
+<!-- audio -->
 <audio id="audio" preload="none"></audio>
 
 <script>
@@ -573,7 +601,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
     back.style.display = (id==='start') ? 'none' : 'block';
 
     /* Quick intro visibility + open state */
-    if(id==='start'){ 
+    if(id==='start'){
       qi.style.display='none';
     }else{
       qi.style.display='block';
