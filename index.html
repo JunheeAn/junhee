@@ -32,10 +32,10 @@ a{text-decoration:none;color:var(--link-fg);
 @media (prefers-reduced-motion:reduce){a{animation:none}}
 a:focus-visible{outline:2px solid #f59e0b;outline-offset:3px;border-radius:2px}
 
-/* emphasized pieces in ⟨angle⟩ */
+/* emphasized pieces (no visual <> now) */
 .angle{color:#000}
-.angle::before{content:"<";margin-right:.25ch}
-.angle::after{content:">";margin-left:.25ch}
+/* ⟨⟩ 표시는 없애기 위해 before/after 제거 */
+.angle::before,.angle::after{content:none}
 .angle a{color:var(--link-fg)!important;text-shadow:-.5px -.5px 0 var(--link-stroke), .5px -.5px 0 var(--link-stroke), -.5px .5px 0 var(--link-stroke), .5px .5px 0 var(--link-stroke);animation:blink 1.6s linear infinite}
 
 /* sections (hash routing) */
@@ -70,22 +70,22 @@ figcaption{margin-top:.175rem;margin-bottom:1rem;font-size:.8rem;color:#111}
 .custom-text-container a:hover{border-bottom-color:currentColor}
 @media (max-width:768px){.custom-text-container{display:none}}
 
-/* dark chapters 11~23 */
+/* dark chapters 11~ */
 body.dark{background:#000;color:#9ca3af}
 body.dark section{background:#000}
 body.dark p{color:#9ca3af}
 body.dark figcaption{color:#fff}
 body.dark .custom-text-container{color:#fff}
-body.dark .angle{color:#fff} /* 핵심: ⟨angle⟩ #11+ 흰색 */
+body.dark .angle{color:#fff} /* #11+ 흰색 */
 
-/* top-left back */
+/* top-left home */
 .back-to-start{
   position:fixed;top:10px;left:var(--pad);z-index:30;display:none;
   color:#111;text-shadow:none;animation:none;font-size:1rem;
 }
 body.dark .back-to-start{color:#fff}
 
-/* quick intro card (fixed top-right) */
+/* quick intro (fixed top-right) */
 details.quick-intro{
   position:fixed;top:10px;right:var(--pad);z-index:30;display:none;
   width:min(40ch,44vw);
@@ -95,8 +95,16 @@ details.quick-intro{
   color:#111;padding:8px 12px;
 }
 details.quick-intro[open]{background:rgba(255,255,255,.72)}
+/* 접혀있을 때: 상자 제거, 글씨만 */
+details.quick-intro:not([open]){
+  background:transparent;border:0;box-shadow:none;padding:0;
+}
 details.quick-intro summary{cursor:pointer;list-style:none;font-size:1rem;line-height:1.35;font-weight:700;text-align:right}
 details.quick-intro summary::-webkit-details-marker{display:none}
+/* 요건 색상: 라이트/다크 */
+details.quick-intro:not([open]) summary{color:#6b7280}
+body.dark details.quick-intro:not([open]) summary{color:#d1d5db}
+
 details.quick-intro .content{margin-top:.5rem}
 details.quick-intro dl{display:grid;grid-template-columns:auto 1fr;gap:.25rem .75rem;font-size:.92rem}
 details.quick-intro dt{color:#6b7280}
@@ -105,9 +113,15 @@ details.quick-intro a:hover{border-bottom-color:#111}
 
 /* #22 two-up gallery */
 .two-up{display:flex;gap:12px;align-items:flex-start;justify-content:center;margin-top:80px}
-.two-up a{display:block;flex:1;max-width:48%}
-.two-up img{width:100%;height:auto;display:block;border-radius:6px}
+.two-up a{display:block;flex:1;max-width:48%;animation:none!important;text-shadow:none}
+.two-up img{width:100%;height:auto;display:block;border-radius:6px;transition:transform .18s ease, filter .18s ease, box-shadow .18s ease}
+.two-up a:hover img{transform:translateY(-2px);filter:brightness(1.03);box-shadow:0 8px 24px rgba(0,0,0,.12)}
 @media (max-width:900px){.two-up{flex-direction:column;gap:8px} .two-up a{max-width:100%}}
+
+/* #0 흰 점 옆 안내 링크 */
+#sec0-nextline{display:flex;align-items:center;gap:.75rem;justify-content:flex-start}
+.ghost-hint{font-size:1rem;font-weight:700;color:#6b7280;text-shadow:none;animation:none}
+body.dark .ghost-hint{color:#d1d5db}
 </style>
 
 <script> if(!location.hash){location.hash='#start';} </script>
@@ -146,7 +160,10 @@ details.quick-intro a:hover{border-bottom-color:#111}
       <figcaption>花1. 2018.</figcaption>
     </figure>
   </figure>
-  <p><a href="#1">●</a></p>
+  <p id="sec0-nextline">
+    <a class="ghost-hint" href="#23">(누르면 안되는)</a>
+    <a href="#1">●</a>
+  </p>
 </section>
 
 <!-- 1 -->
@@ -170,20 +187,20 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <p>●<br><br><span class="angle">1995년 4월 22일 출생. 이름은 안준희이다.</span> <a href="#3">학생</a></p>
 </section>
 
-<!-- 3 -->
+<!-- 3 (문장 교체) -->
 <section id="3">
   <div class="custom-text-container">출생<br>학생<br>어린 시절</div>
   <figure>
     <figure><img src="assets/img/28.png" alt="익숙한 강원, 우연한 축제. 2019" loading="lazy"><figcaption>익숙한 강원, 우연한 축제. 2019. '인생은 축제처럼'</figcaption></figure>
   </figure>
-  <p>●<br><br><a href="https://www.snu.ac.kr/index.html" target="_blank" rel="noopener">서울대학교</a> 시각디자인 전공 졸업을 앞둔 학생이다. <a href="#4">어린 시절</a></p>
+  <p>●<br><br>1995년 4월 22일 출생. 이름은 안준희이다. <span class="angle"><a href="https://www.snu.ac.kr/index.html" target="_blank" rel="noopener">서울대학교</a> 시각디자인 전공 졸업을 앞둔 학생이다.</span> <a href="#4">어린 시절</a></p>
 </section>
 
-<!-- 4 -->
+<!-- 4 (문장 교체) -->
 <section id="4">
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피</div>
   <figure><figure><img src="assets/img/38.png" alt="" loading="lazy"></figure></figure>
-  <p>●<br><br>1995년 4월 22일 대전 출생. 이름은 안준희이다. <span class="angle">어린 시절 곤충을 참 좋아했다.</span> 서울대학교 시각디자인 전공 졸업을 앞둔 학생이다. <a href="#5">탈피</a></p>
+  <p>●<br><br>1995년 4월 22일 출생. 이름은 안준희이다. <span class="angle">어린 시절 곤충을 참 좋아했다.</span> 서울대학교 시각디자인 전공 졸업을 앞둔 학생이다. <a href="#5">탈피</a></p>
 </section>
 
 <!-- 5 -->
@@ -242,7 +259,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <p>●<br><br>1995년 4월 22일 대전 출생. 이름은 안준희이다. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 '관찰'과 '변화'이다. 소재는 '물'이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. <span class="angle">유연한 물처럼 언제든지 변화할 준비를 한다.</span> 2024년 2월 시각디자인 전공 졸업을 한다. <a href="#11">각인</a></p>
 </section>
 
-<!-- 11 (dark from here) -->
+<!-- 11 -->
 <section id="11">
   <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공</div>
   <figure>
@@ -358,7 +375,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
   <p>●<br><br>1995년 4월 22일 대전 출생. 이름은 안준희이다. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 '관찰'과 '변화'이다. 소재는 '물'이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부(F=ma)에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 2019년 9월 입대를 한다. 2021년 4월 만기 전역을 한다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. 외계인과 UFO는 실존한다!<span class="angle">(외계인에게 주민등록증을 발급한다면...)</span> LONG과 Short 역시 사실 차이가 없다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 돈을 주제로 졸업전시를 한다. 'Elliott Wave Theory'을 공부(?)하고 실전투자대회에 여러번 참가한다. 'DreamCanvas' 개인 프로젝트를 시작한다. <span class="angle">AI NPC에게 주민등록증을 발급한다면 (    ) 문제를 단숨에 해결할 수 있을 것이다.</span> 2024년 2월 시각디자인 전공 졸업을 한다. <a href="#22">졸업</a></p>
 </section>
 
-<!-- 22 -->
+<!-- 22 (반짝임 제거 + hover만) -->
 <section id="22">
   <div class="two-up">
     <a href="#21" aria-label="이전(#21)"><img src="assets/img/34.png" alt="마무리 좌측" loading="lazy"></a>
@@ -382,7 +399,6 @@ details.quick-intro a:hover{border-bottom-color:#111}
 (()=> {
   const $=(s,el=document)=>el.querySelector(s);
   const $$=(s,el=document)=>Array.from(el.querySelectorAll(s));
-  const ids=$$('section[id]').map(s=>s.id);
   const back=$('.back-to-start'); const qi=$('#qi'); const qiSummary=$('#qi-summary');
 
   const longTitle='(안 준 희)에 관한 — <span class="sub">현대인을 위한 빠른 소개</span>';
@@ -402,7 +418,7 @@ details.quick-intro a:hover{border-bottom-color:#111}
     else{
       qi.style.display='block';
       qiSummary.innerHTML = (id==='0')? longTitle : shortTitle;
-      qi.open = (id==='0'); // #0 펼침, 그 이후 접힘
+      qi.open = (id==='0'); // #0 펼침, 그 이후 접힘(요청)
     }
   }
 
