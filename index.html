@@ -83,8 +83,8 @@
       color:var(--fg-strong);
       z-index:5;
     }
-    /* 어두운 장에서는 흰색으로 */
-    section[id^="11"] .custom-text-container{ color:#fff; }
+    /* 다크 모드(현재 섹션이 11~22일 때) */
+    body.dark .custom-text-container{ color:#fff; }
     /* 키워드 링크 스타일 */
     .custom-text-container a{
       color:inherit; text-shadow:none; animation:none;
@@ -94,6 +94,17 @@
     .custom-text-container a:focus-visible{ outline:1px solid currentColor; outline-offset:2px; }
 
     @media (max-width:768px){.custom-text-container{display:none}}
+
+    /* 상단 좌측 '(     )' — 언제든 #start로 */
+    .back-to-start{
+      position:fixed; top:10px; left:var(--pad);
+      z-index:20; color:var(--fg-strong); text-shadow:none; animation:none;
+      font-size:1rem;
+    }
+    body.dark .back-to-start{ color:#fff; }
+
+    /* 다크 섹션에서 캡션도 밝게 */
+    body.dark figcaption{ color:#fff; }
 
     /* sr-only for a11y */
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -106,6 +117,7 @@
 </head>
 <body>
   <h1 class="sr-only">About — 안준희</h1>
+  <a class="back-to-start" href="#start">(     )</a>
 
   <!-- START -->
   <section id="start">
@@ -371,7 +383,7 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. <mark>(서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.)</mark> 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. <mark>(서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.)</mark> 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. <mark>2024년 2월 졸업을 한다.</mark> 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
       <mark>돈을 주제로 졸업전시를 한다.</mark>
       <a href="#15">epoché<br><br><br><br></a>
     </p>
@@ -379,7 +391,7 @@
 
   <!-- 15 -->
   <section id="15">
-    <div class="custom-text-container">...<br>epoché<br>Elliott Wave</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave</div>
     <figure>
       <figure>
         <img src="assets/img/16.png" alt="MONEYNOW. 2021" loading="lazy">
@@ -399,7 +411,7 @@
 
   <!-- 16 -->
   <section id="16">
-    <div class="custom-text-container">...<br>Elliott Wave<br>#1 LONG</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG</div>
     <figure>
       <figure>
         <img src="assets/img/25.png" alt="양생음사/음생양사. 2022" loading="lazy">
@@ -415,7 +427,7 @@
 
   <!-- 17 -->
   <section id="17">
-    <div class="custom-text-container">...<br>#1 LONG<br>#2 SHORT</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT</div>
     <figure>
       <figure>
         <figure>
@@ -436,7 +448,7 @@
 
   <!-- 18 -->
   <section id="18">
-    <div class="custom-text-container">...<br>#2 SHORT<br>확실해?</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?</div>
     <figure>
       <figure>
         <figure>
@@ -457,7 +469,7 @@
 
   <!-- 19 -->
   <section id="19">
-    <div class="custom-text-container">...<br>확실해?<br>요즘엔</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔</div>
     <figure>
       <figure>
         <figure>
@@ -478,7 +490,7 @@
 
   <!-- 20 -->
   <section id="20">
-    <div class="custom-text-container">...<br>요즘엔<br>Non-player</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔<br>Non-player</div>
     <figure>
       <figure>
         <figure>
@@ -496,7 +508,7 @@
 
   <!-- 21 -->
   <section id="21">
-    <div class="custom-text-container">...<br>Non-player<br>●</div>
+    <div class="custom-text-container">출생<br>학생<br>어린 시절<br>탈피<br>물<br>上善若水<br>관찰과 변화<br>사람<br>준비<br>각인<br>성공<br>돈<br>졸업전시<br>epoché<br>Elliott Wave<br>#1 LONG<br>#2 SHORT<br>확실해?<br>요즘엔<br>Non-player<br>●</div>
     <figure>
       <figure>
         <figure>
@@ -528,17 +540,26 @@
       const $= (s,el=document)=>el.querySelector(s);
       const $$=(s,el=document)=>Array.from(el.querySelectorAll(s));
 
-      // 한 섹션만 보이게 (구형 브라우저 폴백)
       const sections = $$('section[id]');
+      const ids = sections.map(s=>s.id);
+
+      function isDark(id){
+        const n = parseInt(id,10);
+        return !isNaN(n) && n>=11 && n<=22;
+      }
+
       function render(){
         const id=(location.hash||'#start').slice(1);
+        // show one
         sections.forEach(s=>s.style.display='none');
         (document.getElementById(id)||sections[0]).style.display='block';
+        // body dark toggle
+        document.body.classList.toggle('dark', isDark(id));
       }
       window.addEventListener('hashchange',render);
       window.addEventListener('DOMContentLoaded',render);
 
-      // “단상” 클릭 시: 오디오 소스가 없으면 그냥 무시하고 해시 이동만
+      // “단상” 클릭 시: 오디오 소스가 없으면 무시하고 해시 이동만
       const trigger = $('#audio-trigger');
       const audio = $('#audio');
       if(trigger){
@@ -549,7 +570,6 @@
       }
 
       // ← → 키로 이동
-      const ids = sections.map(s=>s.id);
       window.addEventListener('keydown',(e)=>{
         if(!ids.length) return;
         const cur=(location.hash||'#start').slice(1);
@@ -558,7 +578,7 @@
         if(j!==i) location.hash='#'+ids[j];
       });
 
-      // 좌측 키워드 자동 링크화
+      // 좌측 키워드 자동 링크화 + 맨 위에 '●' 고정/링크(#0)
       const labelToId = {
         '●':'0',
         '출생':'1','학생':'2','어린 시절':'3','탈피':'4','물':'5','上善若水':'6',
@@ -567,10 +587,16 @@
         '확실해?':'18','요즘엔':'19','Non-player':'20'
       };
       $$('.custom-text-container').forEach(box=>{
-        const parts = box.innerHTML.split('<br>');
-        const linked = parts.map(part=>{
-          const t = part.replace(/<\/?[^>]+(>|$)/g,'').trim();
-          if(!t) return '';
+        const parts = box.innerHTML
+          .replace(/<br\s*\/?>/gi,'\n')
+          .split('\n')
+          .map(t=>t.replace(/<\/?[^>]+>/g,'').trim())
+          .filter(s=>s.length>0);
+
+        // 맨 위에 '●' 보장
+        if (parts[0] !== '●') parts.unshift('●');
+
+        const linked = parts.map(t=>{
           const id = labelToId[t];
           return id ? `<a href="#${id}" title="${t}">${t}</a>` : t;
         });
