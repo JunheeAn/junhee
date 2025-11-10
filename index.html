@@ -45,7 +45,7 @@
     section{display:none!important}
     section:target{display:block!important;animation:fadeIn .32s ease-in}
     @keyframes fadeIn{from{opacity:.001}to{opacity:1}}
-    /* 해시가 없을 때 첫 섹션 보이기(지원 브라우저) */
+    /* 해시가 없을 때 첫 섹션 보이기 */
     body:not(:has(section:target)) section:first-of-type{display:block!important}
 
     /* Start */
@@ -83,19 +83,15 @@
       color:var(--fg-strong);
       z-index:5;
     }
-    /* 다크 모드(현재 섹션이 11~22일 때) */
-    body.dark .custom-text-container{ color:#fff; }
-    /* 키워드 링크 스타일 */
+    body.dark .custom-text-container{ color:#fff; } /* 다크 섹션에서 흰색 */
     .custom-text-container a{
-      color:inherit; text-shadow:none; animation:none;
-      border-bottom:1px solid transparent; padding:1px 2px; border-radius:2px;
+      color:inherit;text-shadow:none;animation:none;border-bottom:1px solid transparent;padding:1px 2px;border-radius:2px;
     }
     .custom-text-container a:hover{ border-bottom-color:currentColor; }
     .custom-text-container a:focus-visible{ outline:1px solid currentColor; outline-offset:2px; }
-
     @media (max-width:768px){.custom-text-container{display:none}}
 
-    /* 상단 좌측 '(     )' — 언제든 #start로 */
+    /* 상단 좌측 '(          )' — 언제든 #start로 */
     .back-to-start{
       position:fixed; top:10px; left:var(--pad);
       z-index:20; color:var(--fg-strong); text-shadow:none; animation:none;
@@ -105,6 +101,26 @@
 
     /* 다크 섹션에서 캡션도 밝게 */
     body.dark figcaption{ color:#fff; }
+
+    /* Quick Intro 카드 (#0 오른쪽 이미지 위 오버레이) */
+    .quick-intro{
+      position:absolute; top:60px; right:var(--pad);
+      width:min(40ch, 44vw);
+      background:rgba(255,255,255,.85);
+      backdrop-filter:saturate(1.2) blur(3px);
+      border:1px solid #e5e7eb; border-radius:10px;
+      box-shadow:0 6px 20px rgba(0,0,0,.06);
+      color:#111; padding:12px 14px; z-index:10;
+    }
+    .quick-intro h2{ font-size:1rem; line-height:1.3; margin-bottom:.4rem; }
+    .quick-intro h2 .sub{ font-size:.85rem; color:#374151; }
+    .quick-intro dl{ display:grid; grid-template-columns:auto 1fr; gap:.25rem .75rem; font-size:.9rem; }
+    .quick-intro dt{ color:#6b7280 }
+    .quick-intro a{ color:#111; text-shadow:none; animation:none; border-bottom:1px solid #d1d5db }
+    .quick-intro a:hover{ border-bottom-color:#111 }
+    @media (max-width:900px){
+      .quick-intro{ position:static; width:100%; margin:0 0 .75rem 0 }
+    }
 
     /* sr-only for a11y */
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -117,19 +133,34 @@
 </head>
 <body>
   <h1 class="sr-only">About — 안준희</h1>
-  <a class="back-to-start" href="#start">(     )</a>
+
+  <!-- 상단 좌측: 시작과 같은 공백 간격의 괄호 버튼 -->
+  <a class="back-to-start" href="#start">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</a>
 
   <!-- START -->
   <section id="start">
     <p>
-      <mark>(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)에 관한</mark>
-      <a href="#0" id="audio-trigger" aria-label="단상(음악 재생)">&nbsp;단상</a>
+      <mark>(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)에 관한 </mark><a href="#0" id="audio-trigger" aria-label="단상(음악 재생)">단상</a>
     </p>
   </section>
 
   <!-- 0 -->
   <section id="0">
     <div class="custom-text-container">●<br><br></div>
+
+    <!-- 빠른 소개(우측 이미지 위 오버레이) -->
+    <div class="quick-intro" aria-label="바쁜 현대인을 위한 빠른 소개">
+      <h2>(안 준 희)에 관한 — <span class="sub">바쁜 현대인을 위한 빠른 소개</span></h2>
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:01051683537">010 5168 3537</a></dd>
+        <dt>Email</dt><dd>(학교) <a href="mailto:pl178ex@snu.ac.kr">pl178ex@snu.ac.kr</a></dd>
+        <dt></dt><dd>(비즈니스) <a href="mailto:dluca.ailab@gmail.com">dluca.ailab@gmail.com</a></dd>
+        <dt>Insta</dt><dd><a href="https://instagram.com/d.luca0" target="_blank" rel="noopener">@d.luca0</a></dd>
+        <dt>DLUCA</dt><dd><a href="https://junheean.github.io/dluca/" target="_blank" rel="noopener">junheean.github.io/dluca/</a></dd>
+        <dt>Portfolio</dt><dd><a href="https://dluca.myportfolio.com/" target="_blank" rel="noopener">dluca.myportfolio.com</a></dd>
+      </dl>
+    </div>
+
     <figure>
       <figure>
         <img src="assets/img/1.png" alt="花1, 2018" loading="lazy">
@@ -398,7 +429,6 @@
         <figcaption>MONEYNOW. 2021. 아이들을 위한 자산관리앱.</figcaption>
       </figure>
       <figure>
-        <!-- carpo 영상은 아직 없으므로 폴백 -->
         <div class="video-fallback" role="img" aria-label="carpo 영상 준비 중">carpo — 영상 준비 중</div>
         <figcaption>carpo. 2022.</figcaption>
       </figure>
@@ -532,7 +562,7 @@
     </p>
   </section>
 
-  <!-- 오디오는 지금 파일 없음: 빈 태그(폴백) -->
+  <!-- 오디오: 현재 파일 없음(빈 태그) -->
   <audio id="audio" preload="none"></audio>
 
   <script>
@@ -543,23 +573,21 @@
       const sections = $$('section[id]');
       const ids = sections.map(s=>s.id);
 
-      function isDark(id){
+      const isDark = id => {
         const n = parseInt(id,10);
         return !isNaN(n) && n>=11 && n<=22;
-      }
+      };
 
       function render(){
         const id=(location.hash||'#start').slice(1);
-        // show one
         sections.forEach(s=>s.style.display='none');
         (document.getElementById(id)||sections[0]).style.display='block';
-        // body dark toggle
         document.body.classList.toggle('dark', isDark(id));
       }
       window.addEventListener('hashchange',render);
       window.addEventListener('DOMContentLoaded',render);
 
-      // “단상” 클릭 시: 오디오 소스가 없으면 무시하고 해시 이동만
+      // “단상” 클릭: 오디오 소스 없으면 무시하고 해시 이동만
       const trigger = $('#audio-trigger');
       const audio = $('#audio');
       if(trigger){
@@ -569,7 +597,7 @@
         });
       }
 
-      // ← → 키로 이동
+      // 키보드 ← →
       window.addEventListener('keydown',(e)=>{
         if(!ids.length) return;
         const cur=(location.hash||'#start').slice(1);
@@ -593,7 +621,6 @@
           .map(t=>t.replace(/<\/?[^>]+>/g,'').trim())
           .filter(s=>s.length>0);
 
-        // 맨 위에 '●' 보장
         if (parts[0] !== '●') parts.unshift('●');
 
         const linked = parts.map(t=>{
