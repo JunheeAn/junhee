@@ -84,10 +84,10 @@ body.dark .angle{color:#fff}
 }
 body.dark .back-to-start{color:#fff}
 
-/* NEW: jump to last (moved to very top, text changed) */
+/* jump to last — align to paragraph left edge; hidden on #start via JS */
 .jump-last{
-  position:fixed;top:10px;left:calc(var(--pad) + 160px);z-index:30;
-  color:#111;text-shadow:none;animation:none;font-size:1rem;
+  position:fixed;top:10px;left:calc(50vw - min(90vw, var(--p-width))/2);z-index:30;
+  color:#111;text-shadow:none;animation:none;font-size:1rem;display:none;
 }
 body.dark .jump-last{color:#fff}
 
@@ -111,7 +111,6 @@ details.quick-intro dl{display:grid;grid-template-columns:auto 1fr;gap:.25rem .7
 details.quick-intro dt{color:#6b7280}
 details.quick-intro a{color:#111;text-shadow:none;animation:none;border-bottom:1px solid #d1d5db}
 details.quick-intro a:hover{border-bottom-color:#111}
-/* NEW: card name on top (keep base font size) */
 .quick-intro .card-name{font-weight:700;margin:0 0 .45rem;text-align:right}
 
 /* #22 two-up gallery */
@@ -133,14 +132,13 @@ body.dark .ghost-hint{color:#d1d5db}
 
 <!-- top-left home -->
 <a class="back-to-start" href="#start">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</a>
-<!-- NEW: top link moved & text changed -->
+<!-- jump to last -->
 <a class="jump-last" href="#23">(마지막 장으로)</a>
 
 <!-- quick intro (fixed) -->
 <details class="quick-intro" id="qi">
   <summary id="qi-summary"></summary>
   <div class="content">
-    <!-- NEW: name line on the very top of the card -->
     <div class="card-name">안 준 희 AN JUNHEE</div>
     <dl>
       <dt>Phone</dt><dd><a href="tel:01051683537">010 5168 3537</a></dd>
@@ -168,7 +166,6 @@ body.dark .ghost-hint{color:#d1d5db}
     </figure>
   </figure>
   <p id="sec0-nextline">
-    <!-- REMOVED old (누르면 안되는) line per request -->
     <a href="#1">●</a>
   </p>
 </section>
@@ -406,9 +403,11 @@ body.dark .ghost-hint{color:#d1d5db}
 (()=> {
   const $=(s,el=document)=>el.querySelector(s);
   const $$=(s,el=document)=>Array.from(el.querySelectorAll(s));
-  const back=$('.back-to-start'); const qi=$('#qi'); const qiSummary=$('#qi-summary');
+  const back=$('.back-to-start'); 
+  const qi=$('#qi'); 
+  const qiSummary=$('#qi-summary');
+  const jl=$('.jump-last');
 
-  /* CHANGED: both long/short labels unified to "(빠른 소개)" */
   const longTitle='(빠른 소개)';
   const shortTitle='(빠른 소개)';
 
@@ -421,6 +420,7 @@ body.dark .ghost-hint{color:#d1d5db}
     document.body.classList.toggle('dark', darkOn(id));
 
     back.style.display=(id==='start')?'none':'block';
+    jl.style.display=(id==='start')?'none':'block'; // #start에서 숨김, #0부터 표시
 
     if(id==='start'){ qi.style.display='none'; }
     else{
