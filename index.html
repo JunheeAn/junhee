@@ -53,7 +53,8 @@
 
     /* Text block */
     p{position:relative;top:60px;margin-inline:auto;width:min(90vw,var(--p-width));text-align:left}
-    #start p{top:0;height:100vh;display:grid;place-items:center}
+    /* #start 문구를 한 줄로 */
+    #start p{top:0;margin:0;display:inline-block;width:auto;text-align:center}
 
     mark{color:var(--mark-fg);background:transparent}
 
@@ -74,6 +75,7 @@
     section[id^="11"],section[id^="12"],section[id^="13"],section[id^="14"],section[id^="15"],section[id^="16"],section[id^="17"],section[id^="18"],section[id^="19"],section[id^="20"],section[id^="21"],section[id^="22"]{background:#000}
     section[id^="11"] p,section[id^="12"] p,section[id^="13"] p,section[id^="14"] p,section[id^="15"] p,section[id^="16"] p,section[id^="17"] p,section[id^="18"] p,section[id^="19"] p,section[id^="20"] p,section[id^="21"] p,section[id^="22"] p{color:#9ca3af}
     section[id^="11"] mark,section[id^="12"] mark,section[id^="13"] mark,section[id^="14"] mark,section[id^="15"] mark,section[id^="16"] mark,section[id^="17"] mark,section[id^="18"] mark,section[id^="19"] mark,section[id^="20"] mark,section[id^="21"] mark,section[id^="22"] mark{color:#fff;background:transparent}
+    body.dark figcaption{color:#fff}
 
     /* Left stacked keywords (timeline) */
     .custom-text-container{
@@ -91,42 +93,45 @@
     .custom-text-container a:focus-visible{ outline:1px solid currentColor; outline-offset:2px; }
     @media (max-width:768px){.custom-text-container{display:none}}
 
-    /* 상단 좌측 '(          )' — 언제든 #start로 */
+    /* 상단 좌측 '(          )' — #start에서는 숨김, 그 외 표시 */
     .back-to-start{
       position:fixed; top:10px; left:var(--pad);
       z-index:20; color:var(--fg-strong); text-shadow:none; animation:none;
-      font-size:1rem;
+      font-size:1rem; display:none;
     }
     body.dark .back-to-start{ color:#fff; }
 
-    /* 다크 섹션에서 캡션도 밝게 */
-    body.dark figcaption{ color:#fff; }
-
-    /* Quick Intro 카드 (#0 오른쪽 이미지 위 오버레이) */
-    .quick-intro{
-      position:absolute; top:60px; right:var(--pad);
+    /* #0 빠른 소개 — details/summary 접기 */
+    details.quick-intro{
+      position:absolute; top:10px; right:var(--pad);
       width:min(40ch, 44vw);
-      background:rgba(255,255,255,.85);
+      background:rgba(255,255,255,.9);
       backdrop-filter:saturate(1.2) blur(3px);
       border:1px solid #e5e7eb; border-radius:10px;
       box-shadow:0 6px 20px rgba(0,0,0,.06);
-      color:#111; padding:12px 14px; z-index:10;
+      color:#111; z-index:10;
+      padding:8px 12px;
     }
-    .quick-intro h2{ font-size:1rem; line-height:1.3; margin-bottom:.4rem; }
-    .quick-intro h2 .sub{ font-size:.85rem; color:#374151; }
-    .quick-intro dl{ display:grid; grid-template-columns:auto 1fr; gap:.25rem .75rem; font-size:.9rem; }
-    .quick-intro dt{ color:#6b7280 }
-    .quick-intro a{ color:#111; text-shadow:none; animation:none; border-bottom:1px solid #d1d5db }
-    .quick-intro a:hover{ border-bottom-color:#111 }
+    details.quick-intro[open]{background:rgba(255,255,255,.96)}
+    details.quick-intro summary{
+      cursor:pointer; list-style:none; font-size:1rem; line-height:1.35; font-weight:700;
+      outline:none;
+    }
+    details.quick-intro summary::-webkit-details-marker{display:none}
+    details.quick-intro summary .sub{ font-weight:400; font-size:.92rem; color:#374151 }
+    details.quick-intro .content{ margin-top:.5rem }
+    details.quick-intro dl{ display:grid; grid-template-columns:auto 1fr; gap:.25rem .75rem; font-size:.92rem; }
+    details.quick-intro dt{ color:#6b7280 }
+    details.quick-intro a{ color:#111; text-shadow:none; animation:none; border-bottom:1px solid #d1d5db }
+    details.quick-intro a:hover{ border-bottom-color:#111 }
     @media (max-width:900px){
-      .quick-intro{ position:static; width:100%; margin:0 0 .75rem 0 }
+      details.quick-intro{ position:static; width:100%; margin:0 0 .75rem 0 }
     }
 
     /* sr-only for a11y */
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 
-  <!-- 초기 로드시 흰 화면 방지: 해시 없으면 #start로 -->
   <script>
     if(!location.hash){ location.hash = '#start'; }
   </script>
@@ -134,7 +139,7 @@
 <body>
   <h1 class="sr-only">About — 안준희</h1>
 
-  <!-- 상단 좌측: 시작과 같은 공백 간격의 괄호 버튼 -->
+  <!-- 상단 좌측: 시작과 같은 공백 간격의 괄호 버튼( #start 에서는 JS로 숨김 ) -->
   <a class="back-to-start" href="#start">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</a>
 
   <!-- START -->
@@ -148,18 +153,20 @@
   <section id="0">
     <div class="custom-text-container">●<br><br></div>
 
-    <!-- 빠른 소개(우측 이미지 위 오버레이) -->
-    <div class="quick-intro" aria-label="바쁜 현대인을 위한 빠른 소개">
-      <h2>(안 준 희)에 관한 — <span class="sub">바쁜 현대인을 위한 빠른 소개</span></h2>
-      <dl>
-        <dt>Phone</dt><dd><a href="tel:01051683537">010 5168 3537</a></dd>
-        <dt>Email</dt><dd>(학교) <a href="mailto:pl178ex@snu.ac.kr">pl178ex@snu.ac.kr</a></dd>
-        <dt></dt><dd>(비즈니스) <a href="mailto:dluca.ailab@gmail.com">dluca.ailab@gmail.com</a></dd>
-        <dt>Insta</dt><dd><a href="https://instagram.com/d.luca0" target="_blank" rel="noopener">@d.luca0</a></dd>
-        <dt>DLUCA</dt><dd><a href="https://junheean.github.io/dluca/" target="_blank" rel="noopener">junheean.github.io/dluca/</a></dd>
-        <dt>Portfolio</dt><dd><a href="https://dluca.myportfolio.com/" target="_blank" rel="noopener">dluca.myportfolio.com</a></dd>
-      </dl>
-    </div>
+    <!-- 우측 최상단 접기 카드 -->
+    <details class="quick-intro">
+      <summary>(안 준 희)에 관한 — <span class="sub">현대인을 위한 빠른 소개</span></summary>
+      <div class="content">
+        <dl>
+          <dt>Phone</dt><dd><a href="tel:01051683537">010 5168 3537</a></dd>
+          <dt>Email</dt><dd>(학교) <a href="mailto:pl178ex@snu.ac.kr">pl178ex@snu.ac.kr</a></dd>
+          <dt></dt><dd>(비즈니스) <a href="mailto:dluca.ailab@gmail.com">dluca.ailab@gmail.com</a></dd>
+          <dt>Insta</dt><dd><a href="https://instagram.com/d.luca0" target="_blank" rel="noopener">@d.luca0</a></dd>
+          <dt>DLUCA</dt><dd><a href="https://junheean.github.io/dluca/" target="_blank" rel="noopener">junheean.github.io/dluca/</a></dd>
+          <dt>Portfolio</dt><dd><a href="https://dluca.myportfolio.com/" target="_blank" rel="noopener">dluca.myportfolio.com</a></dd>
+        </dl>
+      </div>
+    </details>
 
     <figure>
       <figure>
@@ -319,7 +326,8 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 변화.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화.</mark> 서울대학교 시각디자인 전공 졸업을 앞두고 있다.
       <mark>나는 물과 같이 유연한 사람이고자 한다.</mark>
       <a href="#10">준비</a>
     </p>
@@ -335,7 +343,8 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화.</mark> 나는 물과 같이 유연한 사람이고자 한다.
       <mark>유연한 물처럼 언제든지 변화할 준비를 한다.</mark>
       <a href="#11">각인</a>
     </p>
@@ -351,7 +360,8 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화.</mark> 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다.
       <mark>틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다.</mark>
       <a href="#12">성공</a>
     </p>
@@ -371,7 +381,8 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. <mark><a href="https://nammyeong.sen.es.kr/index.do" target="_blank" rel="noopener">초등학교</a> 1학년, 김정숙 담임선생님께 사군자를 배웠다.</mark> 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화.</mark> 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다.
       <mark>성공을 상상하다.</mark>
       <a href="#13">돈</a>
     </p>
@@ -389,7 +400,8 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. 키워드는 관찰과 변화이다. 소재는 물이다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화.</mark> 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다.
       <mark>인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.</mark>
       <a href="#14">졸업전시</a>
     </p>
@@ -414,7 +426,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. <mark>(서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.)</mark> 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 2017년에는 서울대학교 디자인학부에 입학하여 시각디자인 전공 졸업을 앞두고 있다. <mark>2024년 2월 졸업을 한다.</mark> 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
       <mark>돈을 주제로 졸업전시를 한다.</mark>
       <a href="#15">epoché<br><br><br><br></a>
     </p>
@@ -434,7 +448,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. <mark>모든 이분법적 사고를 깨버린다.</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. <mark>모든 이분법적 사고를 깨버린다.</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
       <a href="#16">Elliott Wave<br><br><br><br></a>
     </p>
   </section>
@@ -449,7 +465,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.
       <mark>코끼리 파동이론을 공부하고 실전투자대회에 여러번 참가한다.</mark>
       <a href="#17">#1 LONG<br><br><br><br></a>
     </p>
@@ -471,7 +489,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. <mark>숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. </mark>성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. <mark>'<a href="https://en.wikipedia.org/wiki/Elliott_wave_principle" target="_blank" rel="noopener">Elliott Wave Theory</a>'</mark>을 공부하고 실전투자대회에 여러번 참가한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. <mark>숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. </mark>성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. <mark>'<a href="https://en.wikipedia.org/wiki/Elliott_wave_principle" target="_blank" rel="noopener">Elliott Wave Theory</a>'</mark>을 공부하고 실전투자대회에 여러번 참가한다.
       <a href="#18">#2 SHORT<br><br><br><br></a>
     </p>
   </section>
@@ -492,7 +512,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. <mark>Long과 Short 역시 사실 차이가 없다. </mark>성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. <mark>Long과 Short 역시 사실 차이가 없다. </mark>성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다. 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
       <a href="#19">확실해?</a>
     </p>
   </section>
@@ -513,7 +535,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.<mark>(정말로 그럴까?)</mark> 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.<mark>(정말로 그럴까?)</mark> 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
       <a href="#20">요즘엔<br><br><br><br></a>
     </p>
   </section>
@@ -530,7 +554,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. <mark><a href="https://en.wikipedia.org/wiki/Alien" target="_blank" rel="noopener">외계인</a>과 UFO는 실존한다!</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. <mark><a href="https://en.wikipedia.org/wiki/Alien" target="_blank" rel="noopener">외계인</a>과 UFO는 실존한다!</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다.
       <mark>'DreamCanvas' 창업을 준비하고 있다.</mark>
       <a href="#21">Non-player<br><br><br><br></a>
     </p>
@@ -548,7 +574,9 @@
       </figure>
     </figure>
     <p>
-      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다. 초등학교 1학년, 김정숙 담임선생님께 사군자를 배웠다. 2015년 연세대학교 자연과학부에 진학한다. 관찰. 2년 뒤, 서울대학교 디자인학부에 입학한다. 변화. 나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 외계인과 UFO는 실존한다! <mark>(외계인에게 주민등록증을 발급한다면...)</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다. 'DreamCanvas' 창업을 준비하고 있다.
+      ●<br><br>1995년 4월 22일 출생. 어린 시절 곤충을 참 좋아했다. 취미는 매미의 우화 과정을 기록하는 것. (서울특별시 양천구 목동 9단지는 매미를 관찰하기에 최고의 동네다.) 키워드는 관찰과 변화이다. 소재는 물이다. 부드럽고 유약한 것은 굳세고 강한 것을 뚫는다.
+      <mark>2015년 연세대학교 자연과학부에 진학한다. 관찰. 2017년에는 서울대학교 디자인학부에 입학한다. 변화. 2024년 2월 졸업을 한다.</mark>
+      나는 물과 같이 유연한 사람이고자 한다. 유연한 물처럼 언제든지 변화할 준비를 한다. 틀에 박힌 패턴을 부수고 열렬하게 바라는 상상의 그림을 잠재의식에 확실하게 각인한다. 모든 이분법적 사고를 깨버린다. 숭배와 경멸, 경멸과 숭배 어느 순서로 읽던 상관없다. 두 단어는 사실 차이가 없다. Long과 Short 역시 사실 차이가 없다. 외계인과 UFO는 실존한다! <mark>(외계인에게 주민등록증을 발급한다면...)</mark> 성공을 상상하다. 인생에 돈이 다는 아니다. 그러나 돈만한 것이 없다.(정말로 그럴까?) 'Elliott Wave Theory'을 공부하고 실전투자대회에 여러번 참가한다. 'DreamCanvas' 창업을 준비하고 있다.
       <mark>AI NPC에게 주민등록증을 발급한다면 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) 문제를 단숨에 해결할 수 있을 것이다.</mark>
       <a href="#22">●<br><br><br><br></a>
     </p>
@@ -562,7 +590,7 @@
     </p>
   </section>
 
-  <!-- 오디오: 현재 파일 없음(빈 태그) -->
+  <!-- 오디오(선택) -->
   <audio id="audio" preload="none"></audio>
 
   <script>
@@ -583,6 +611,10 @@
         sections.forEach(s=>s.style.display='none');
         (document.getElementById(id)||sections[0]).style.display='block';
         document.body.classList.toggle('dark', isDark(id));
+
+        // back-to-start: #start에서는 숨김, 그 외 표시
+        const back = document.querySelector('.back-to-start');
+        if(back){ back.style.display = (id==='start') ? 'none' : 'block'; }
       }
       window.addEventListener('hashchange',render);
       window.addEventListener('DOMContentLoaded',render);
